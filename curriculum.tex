@@ -27,7 +27,7 @@
 \usepackage{titlesec}
 \usepackage[usenames,dvipsnames]{color}
 \usepackage{enumitem}
-\usepackage[hidelinks]{hyperref}
+\usepackage[hidelinks, pdftitle={Laiqian Ji - CV}, pdfauthor={Laiqian Ji}]{hyperref}
 \usepackage{fancyhdr}
 \usepackage[english]{babel}
 \input{glyphtounicode}
@@ -52,8 +52,9 @@
 
 % Section headings
 \titleformat{\section}{
-  \vspace{-4pt}\scshape\raggedright\large\bfseries
-}{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
+  \scshape\raggedright\large\bfseries
+}{}{0em}{}[\color{black}\titlerule]
+\titlespacing*{\section}{0pt}{14pt}{7pt}
 
 % ATS-readable PDF
 \pdfgentounicode=1
@@ -66,26 +67,21 @@
 % Authoring macros
 %-------------------------
 
-% Bullet inside \entry / \project
-\newcommand{\point}[1]{\item\small{#1\vspace{-2pt}}}
+% Bullets inside \entry / \project
+\setlist[itemize,2]{nosep, topsep=2pt, itemsep=1pt, leftmargin=1.2em, before=\small}
+\newcommand{\point}[1]{\item #1}
 
 % \entry{Org}{Role}{Location}{Dates}{bullets}
 \newcommand{\entry}[5]{%
-  \vspace{-2pt}\item
-  \begin{tabular*}{\textwidth}[t]{l@{\extracolsep{\fill}}r}
-    \textbf{#1} & \textbf{\small #4} \\
-    \textit{\small #2} & \textit{\small #3} \\
-  \end{tabular*}\vspace{-7pt}
-  \begin{itemize}#5\end{itemize}\vspace{-9pt}
+  \item \textbf{#1}\hfill{\small #4}\\
+  \textit{\small #2}\hfill\textit{\small #3}
+  \begin{itemize}#5\end{itemize}
 }
 
 % \project{Title}{Org}{Stack}{Dates}{bullets}  (Org may be empty: {})
 \newcommand{\project}[5]{%
-  \vspace{-2pt}\item
-  \begin{tabular*}{1.001\textwidth}{l@{\extracolsep{\fill}}r}
-    \small\textbf{#1}\ifx\relax#2\relax\else\ with \textbf{#2}\fi\ \emph{| #3} & \textbf{\small #4}\\
-  \end{tabular*}\vspace{-7pt}
-  \begin{itemize}#5\end{itemize}\vspace{-9pt}
+  \item \textbf{#1}\ifx\relax#2\relax\else\ with \textbf{#2}\fi\ \emph{\small | #3}\hfill{\small #4}
+  \begin{itemize}#5\end{itemize}
 }
 
 % \skill{Label}{Value}
@@ -93,12 +89,12 @@
 
 % Wraps a list of \entry or \project items
 \newenvironment{entries}
-  {\begin{itemize}[leftmargin=0in, label={}]}
+  {\begin{itemize}[leftmargin=0in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=8pt]}
   {\end{itemize}}
 
-% Wraps a list of \skill items (compact, indented)
+% Wraps a list of \skill items (compact)
 \newenvironment{keyvalues}
-  {\begin{itemize}[leftmargin=0.15in, label={}, itemsep=-2pt]}
+  {\begin{itemize}[leftmargin=0in, label={}, topsep=0pt, partopsep=0pt, parsep=0pt, itemsep=3pt, before=\small]}
   {\end{itemize}}
 
 %-------------------------------------------
@@ -106,8 +102,8 @@
 \begin{document}
 
 \input{sections/header}
-\input{sections/education}
 \input{sections/experience}
+\input{sections/education}
 \input{sections/projects}
 \input{sections/skills}
 \input{sections/awards}
